@@ -1,6 +1,6 @@
 # Site settings 配置站点
 title: "Coder's Blog"
-description: 'Coder，博士在读，热爱算法。'
+description: '卞学胜，博士在读，热爱算法。'
 keyword: 'Python, Medical Image, Coder, Deep Learning, XMU, Segmentation, Xuesheng Bian, '
 url: 'https://541435721.github.io/' # your host
 
@@ -17,7 +17,7 @@ footer:
   since: 2018
 
 # Author 配置博主信息
-author: '卞学胜'
+author: 'Coder'
 nickname: 'Coder'
 bio: '热爱医学影像处理，热爱深度学习'
 avatar: '/assets/img/profile.png'
