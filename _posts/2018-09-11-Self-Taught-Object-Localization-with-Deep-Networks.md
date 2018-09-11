@@ -28,7 +28,7 @@ tags: Attention object_location deeplearning
 
   如果已知某个图像$x$以及类别标签$c$，可以定义退化函数$d_{CL}:R^N\times N^4 \rightarrow R$，$d_{CL}(x,b)=\delta_f(x,b)^T\mathbb{I}_c$，其中$\mathbb{I}_c\in N^C$是一个指示向量，在第$c$个分量上为1，其余为0。使用退化函数可以计算指定类别的目标区域。
 
-  如果图像的类别信息未知，则使用预测模型对整张图片的$C_I$个类别判断定义$d_{WL}(x,b)=\delta_f(x,b)^T\mathbb{I}_{top-C_I}$，其中$\mathbb{I}_{top-C_I}$也是一个类别指示向量，排名前$C_I$位置的分量为1，其余为0。本文使用`top-5`做计算。
+  如果图像的类别信息未知，则使用预测模型对整张图片的$C_I$个类别判断定义$d_{WL}(x,b)=\delta_f(x,b)^T\mathbb{I}_{top-{C_I}}$，其中$\mathbb{I}_{top-{C_I}}$也是一个类别指示向量，排名前$C_I$位置的分量为1，其余为0。本文使用`top-5`做计算。
 
 - 聚类
 
@@ -48,7 +48,7 @@ tags: Attention object_location deeplearning
   >
   > 3. 覆盖区域都很大
   >
-  >    $s_{size}(x,b_i,b_j)=1-\frac{size(b_i)+size(b_j)}{size(x)}​$
+  >    $s_{size}(x,b_i,b_j)=1-\frac{size(b_i)+size(b_j)}{size(x)}$
   >
   > 4. 在空间上距离较近
   >
