@@ -40,7 +40,7 @@ tags: Attention object_location deeplearning
   >
   > 1. 在分类得分上造成近似的得分退化
   >
-  >    $s_{drop}=(x,b_i,b_j)=1-|d_m(x,b_i)-d_m(x,b_j)|=max(1-d_m(x,b_i),1-d_m(x,b_j))$,其中$m \in {CL,WL}$
+  >    $s_{drop}=(x,b_i,b_j)=1-abs(d_m(x,b_i)-d_m(x,b_j))=max(1-d_m(x,b_i),1-d_m(x,b_j))$,其中$m \in {CL,WL}$
   >
   > 2. 外部表现相似
   >
@@ -48,13 +48,13 @@ tags: Attention object_location deeplearning
   >
   > 3. 覆盖区域都很大
   >
-  >    $s_{size}(x,b_i,b_j)=1-\frac{size(b_i)+size(b_j)}{size(x)}$
+  >    $s_{size}(x,b_i,b_j)=1-\frac{size(b_i)+size(b_j)}{size(x)}​$
   >
   > 4. 在空间上距离较近
   >
   >    $s_{fill}(x,b_i,b_j)=1-\frac{size(b_i\cup b_j)-size(b_i)-size(b_j)}{size(x)}$,其中$b_i \cup b_j$表示包含$b_i$和$b_j$的边框。
   >
-  > 整体的相似度得分为$s(b_i,b_j,x)=\sum_{l\in L}\alpha_ls_l(b_i,b_j,x)$，其中$L=\left \{ drop,app,size,fill \right \}$，试验中设置四个项的权值相等，
+  > 整体的相似度得分为$s(b_i,b_j,x)=\sum_{l\in L}\alpha_ls_l(b_i,b_j,x)$，其中$L=[drop,app,size,fill]$，试验中设置四个项的权值相等，
 
 
 
