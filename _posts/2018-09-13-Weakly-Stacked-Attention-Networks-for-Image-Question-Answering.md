@@ -46,15 +46,19 @@ tags: Attention object_location deeplearning Image_QA
 
       给定问题$q=[q_1,q_2,…,q_T]$，其中$q_t$是一个one-hot向量，表示$t$位置的单词。首先对词汇进行编码，将它嵌入到一个向量空间中，新的问题可以编码为$x=[x_1,x_2,…,x_T]$，其中$x_t=W_eq_t$，$W_e$表示嵌入矩阵，这样做的目的是对问题重新编码，原来的one-hot编码方式数据量过大，而且在特征空间上表达不合理。将新的问题编码送入LSTM得到问题特征：
 
-      $x_t=W_eq_t$,  $t \in \left \{ 1, 2, \cdots, T  \right \}$
+      $x_t=W_eq_t$
 
-      $h_t=LSTM(x_t)$,  $t \in \left \{ 1, 2, \cdots, T \right \}$
+      $t \in \left \{ 1, 2, \cdots, T  \right \}$
+
+      $h_t=LSTM(x_t)$
+
+      $t \in \left \{ 1, 2, \cdots, T \right \}$
 
       最后得到问题的特征表示$v_Q=h_T$
 
     - 基于CNN的问题模型
 
-      同样使用上节介绍的问题编码方法得到最初的问题编码$x$。本文使用三种卷积核，给定尺寸$c$的第$t$个卷积输出表示为$h_{c,t}=tanh(W_cx_{t+c-1}+b_c)$，再对不同的个卷积结果做组合得到三个卷积特征$h_c=[h_{c,1},h_{c,2},…,h_{c,T-c+1}]$，对卷积特征做最大池化：$\widetilde h_c=\underset {t} {max}[h_{c,1},h_{c,2},…,h_{c,T-c+1}]$，最后重组$c$个不同尺寸卷积核的特征，得到最终的问题特征表示$v_Q=h=[\widetilde h_1,\widetilde h_2,\widetilde h_3]$
+      同样使用上节介绍的问题编码方法得到最初的问题编码$x​$。本文使用三种卷积核，给定尺寸$c​$的第$t​$个卷积输出表示为$h_{c,t}=tanh(W_cx_{t+c-1}+b_c)​$，再对不同的个卷积结果做组合得到三个卷积特征$h_c=[h_{c,1},h_{c,2},…,h_{c,T-c+1}]​$，对卷积特征做最大池化：$\widetilde h_c=\underset {t} {max}[h_{c,1},h_{c,2},…,h_{c,T-c+1}]​$，最后重组$c​$个不同尺寸卷积核的特征，得到最终的问题特征表示$v_Q=h=[\widetilde h_1,\widetilde h_2,\widetilde h_3]​$
 
       ![](http://pics.qiangbenyk.cn/2018_09_13_10_15_24_524-k.png)
 
@@ -90,7 +94,7 @@ tags: Attention object_location deeplearning Image_QA
 
     $u^k = \widetilde {v}_I^k + u^{k-1}$
 
-    每次选中图像区域之后，都会更新问题向量，重复$K​$次之后，用最终的问题向量$u^K​$推断问题的答案：$p_{ans}=softmax(W_uu^k+b_u)​$
+    每次选中图像区域之后，都会更新问题向量，重复$K$次之后，用最终的问题向量$u^K$推断问题的答案：$p_{ans}=softmax(W_uu^k+b_u)$
 
 ## 实验
 
