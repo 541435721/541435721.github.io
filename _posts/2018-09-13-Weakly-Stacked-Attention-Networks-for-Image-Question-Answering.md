@@ -2,7 +2,7 @@
 layout: post
 title: 'Stacked Attention Networks for Image Question Answering'
 subtitle: '利用堆叠注意力模型实现精细图像问答'
-date: 2018-09-11
+date: 2018-09-13
 categories: paper
 # cover: 'http://pics.qiangbenyk.cn/2018_09_13_09_12_23_647-F.png'
 tags: Attention object_location deeplearning Image_QA
@@ -28,11 +28,11 @@ tags: Attention object_location deeplearning Image_QA
 
   - 图像模型
 
-    图像模型可以使用各种常用分类卷积网络，如`VGG`，`ResNet`，`DenseNet`等。本文选用`VGG`作为特征提取器。需要对原始模型做修改，去掉所有的全连接层。`VGG`网络输入$448*448$的三通道图像，最后一层卷积层输出$14*14$的512通道的特征图，$14*14$对应源图像中的196个$32*32$的窗口子区域，每一个$32*32$的区域用512维的特征向量表示。本文用$f_i,i\in[0,195]$表示每一个子区域的特征。
+    图像模型可以使用各种常用分类卷积网络，如`VGG`，`ResNet`，`DenseNet`等。本文选用`VGG`作为特征提取器。需要对原始模型做修改，去掉所有的全连接层。`VGG`网络输入$448 \times 448$的三通道图像，最后一层卷积层输出$14 \times 14$的512通道的特征图，$14 \times 14$对应源图像中的196个$32 \times 32$的窗口子区域，每一个$32 \times 32$的区域用512维的特征向量表示。本文用$f_i,i \in [0,195]$表示每一个子区域的特征。
 
     ![](http://pics.qiangbenyk.cn/2018_09_13_09_30_45_685-a.png)
 
-    再使用一层区域全连接对现有特征加权得到新的特征，新特征表示为$v_I=tanh(W_If_I+b_I)$，其中$v_I$是一个矩阵，表示所有图像子区域的加权特征，形状为$512*k$，$k$表示子区域的数目，矩阵的第$i$列表示第$i$个子区域的512维特征。
+    再使用一层区域全连接对现有特征加权得到新的特征，新特征表示为$v_I=tanh(W_If_I+b_I)$，其中$v_I$是一个矩阵，表示所有图像子区域的加权特征，形状为$512 \times k$，$k$表示子区域的数目，矩阵的第$i$列表示第$i$个子区域的512维特征。
 
   - 问题模型
 
@@ -46,9 +46,9 @@ tags: Attention object_location deeplearning Image_QA
 
       给定问题$q=[q_1,q_2,…,q_T]$，其中$q_t$是一个one-hot向量，表示$t$位置的单词。首先对词汇进行编码，将它嵌入到一个向量空间中，新的问题可以编码为$x=[x_1,x_2,…,x_T]$，其中$x_t=W_eq_t$，$W_e$表示嵌入矩阵，这样做的目的是对问题重新编码，原来的one-hot编码方式数据量过大，而且在特征空间上表达不合理。将新的问题编码送入LSTM得到问题特征：
 
-      $x_t=W_eq_t,t\in\left \{1,2,…,T  \right \}$
+      $x_t=W_eq_t,t \in \left \{1,2,…,T  \right \}$
 
-      $h_t=LSTM(x_t),t\in \left \{1,2,…,T \right \}$
+      $h_t=LSTM(x_t),t \in \left \{1,2,…,T \right \}$
 
       最后得到问题的特征表示$v_Q=h_T$
 
@@ -73,6 +73,22 @@ tags: Attention object_location deeplearning Image_QA
     注意力模型是一个小型的两层神经网络，输入为图像特征$v_I$和问题特征$v_P$，分别输入到两个全连接层，这两个全连接层不共享参数，分别得到两个输出，图像特征输出形状为$k\times m$，问题特征输出形状为$1\times k$，将两个特征做矩阵向量加法，得到隐层$h_A$，输出形状为$k \times m$。将隐层输入第二层全连接层，使用softmax激活，输出形状为$1\times m$，分别对应每一个图像子区域特征的权重。
 
     ![](http://pics.qiangbenyk.cn/2018_09_13_12_55_43_095-B.png)
+
+    对于更复杂的图像问答任务，一层注意力往往不足以做出准确定位，可以增加额外的注意力模型提升注意力的定位精度。
+
+  - stack attention
+
+    假定有第$k$层注意力层为$p_I^k$，通过以下公式得到：
+
+    第$k$层注意力的隐层：$h_A^k=tanh(W_{I,A}^kv_I \bigoplus (W_{Q,A}^ku^{k-1}+b_A^k)$
+
+    第$k$层注意力的权重：$p_I^k=softmax(W_P^kh_A^k+b_P^k)$
+
+    公式中的$u^0$初始值为$v_Q$，即问题特征。聚合的图像特征$\widetilde {v}_I^k$加上原来的问题向量形成新的问题向量。
+
+    $\widetilde {v}_I^k = \sum_{i}{p_i^kv_i}$，$u^k = \widetilde {v}_I^k + u^{k-1}$
+
+    每次选中图像区域之后，都会更新问题向量，重复$K$次之后，用最终的问题向量$u^K$推断问题的答案：$p_{ans}=softmax(W_uu^k+b_u)​$
 
 ## 实验
 
