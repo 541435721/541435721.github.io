@@ -90,7 +90,7 @@ tags: Attention object_location deeplearning Image_QA
 
     $u^k = \widetilde {v}_I^k + u^{k-1}$
 
-    每次选中图像区域之后，都会更新问题向量，重复$K$次之后，用最终的问题向量$u^K$推断问题的答案：$p_{ans}=softmax(W_uu^k+b_u)$
+    每次选中图像区域之后，都会更新问题向量，重复$K​$次之后，用最终的问题向量$u^K​$推断问题的答案：$p_{ans}=softmax(W_uu^k+b_u)​$
 
 ## 实验
 
