@@ -46,11 +46,11 @@ tags: Attention object_location deeplearning Image_QA
 
       给定问题$q=[q_1,q_2,…,q_T]$，其中$q_t$是一个one-hot向量，表示$t$位置的单词。首先对词汇进行编码，将它嵌入到一个向量空间中，新的问题可以编码为$x=[x_1,x_2,…,x_T]$，其中$x_t=W_eq_t$，$W_e$表示嵌入矩阵，这样做的目的是对问题重新编码，原来的one-hot编码方式数据量过大，而且在特征空间上表达不合理。将新的问题编码送入LSTM得到问题特征：
 
-      $x_t=W_eq_t,t \in \left \{ 1,2,\cdots,T  \right \}$
+      $x_t=W_eq_t$,$t \in \left \{ 1,2,\cdots,T  \right \}$
 
-      $h_t=LSTM(x_t),t \in \left \{ 1,2,\cdots,T \right \}$
+      $h_t=LSTM(x_t)$,$t \in \left \{ 1,2,\cdots,T \right \}$
 
-      最后得到问题的特征表示$v_Q=h_T$
+      最后得到问题的特征表示$v_Q=h_T​$
 
     - 基于CNN的问题模型
 
@@ -88,7 +88,7 @@ tags: Attention object_location deeplearning Image_QA
 
     $\widetilde {v}_I^k = \sum_{i}{p_i^kv_i}$
 
-    $u^k = \widetilde {v}_I^k + u^{k-1}​$
+    $u^k = \widetilde {v}_I^k + u^{k-1}$
 
     每次选中图像区域之后，都会更新问题向量，重复$K$次之后，用最终的问题向量$u^K$推断问题的答案：$p_{ans}=softmax(W_uu^k+b_u)$
 
