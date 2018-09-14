@@ -84,7 +84,7 @@ tags: Attention object_location deeplearning Image_QA
 
     第$k$层注意力的权重：$p_I^k=softmax(W_P^kh_A^k+b_P^k)$
 
-    公式中的$u^0​$初始值为$v_Q​$，即问题特征。聚合的图像特征$\widetilde {v}_I^k​$加上原来的问题向量形成新的问题向量。
+    公式中的$u^0$初始值为$v_Q$，即问题特征。聚合的图像特征$\widetilde {v}_I^k$加上原来的问题向量形成新的问题向量。
 
     $ \widetilde {v}_I^k = \sum _{i}{p_i^k v_i}$
 
