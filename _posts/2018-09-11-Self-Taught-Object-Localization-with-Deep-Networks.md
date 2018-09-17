@@ -4,7 +4,7 @@ title: 'Self-Taught Object Localization with Deep Networks'
 subtitle: '利用卷积网络让网络具备目标定位能力'
 date: 2018-09-11
 categories: paper
-# cover: 'http://pics.qiangbenyk.cn/2018_09_11_13_09_37_890-c.png'
+cover: 'http://pics.qiangbenyk.cn/2018_09_11_13_09_37_890-c.png'
 tags: Attention object_location deeplearning
 ---
 

@@ -4,7 +4,7 @@ title: 'Show, Attend and Tell: Neural Image Caption Generation with Visual Atten
 subtitle: '利用注意力机制实现图像描述生成'
 date: 2018-09-14
 categories: paper
-# cover: 'http://pics.qiangbenyk.cn/2018_09_14_10_55_51_587-A.png'
+cover: 'http://pics.qiangbenyk.cn/2018_09_14_10_55_51_587-A.png'
 tags: Attention object_location deeplearning Image_Caption
 ---
 

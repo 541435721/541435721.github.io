@@ -4,7 +4,7 @@ title: 'Stacked Attention Networks for Image Question Answering'
 subtitle: '利用堆叠注意力模型实现精细图像问答'
 date: 2018-09-13
 categories: paper
-# cover: 'http://pics.qiangbenyk.cn/2018_09_13_09_12_23_647-F.png'
+cover: 'http://pics.qiangbenyk.cn/2018_09_13_09_12_23_647-F.png'
 tags: Attention object_location deeplearning Image_QA
 ---
 

@@ -4,7 +4,7 @@ title: 'Learning Deep Features for Discriminative Localization'
 subtitle: '利用类别标签让网络具备目标定位能力'
 date: 2018-09-10
 categories: paper
-# cover: 'http://pics.qiangbenyk.cn/2018_09_11_09_41_50_212-Q.png'
+cover: 'http://pics.qiangbenyk.cn/2018_09_11_09_41_50_212-Q.png'
 tags: Attention object_location deeplearning
 ---
 
