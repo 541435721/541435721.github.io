@@ -31,3 +31,4 @@ tags: Attention deeplearning
 19.  [Dual Attention Network for Scene Segmentation(AAAI 2019)](https://arxiv.org/pdf/1809.02983.pdf)
 20.  [深度学习中的注意力机制](https://blog.csdn.net/tg229dvt5i93mxaq5a6u/article/details/78422216)
 21.  [刁宇峰 AAAI2018中的自注意力机制(Self-attention Mechanism)](http://ir.dlut.edu.cn/news/detail/486)
+
